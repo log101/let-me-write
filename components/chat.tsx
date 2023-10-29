@@ -16,12 +16,14 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
 import { Text } from '@/lib/consts'
 import UnderlinedTextArea from './underlined-textarea'
+import { analyseText } from '@/lib/api'
+import { Analysis } from '@/lib/ai'
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
@@ -37,39 +39,61 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
   const [text, setText] = useState<Text>()
-  const { messages, append, reload, stop, isLoading, input, setInput } =
-    useChat({
-      initialMessages,
-      id,
-      body: {
-        id,
-        previewToken
-      },
-      onResponse(response) {
-        if (response.status === 401) {
-          toast.error(response.statusText)
-        }
-      }
-    })
+  const [analysis, setAnalysis] = useState<Analysis>()
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (providedText: string) => {
+    setLoading(true)
+
+    if (text) {
+      const res = await analyseText({ part1: text?.text, part2: providedText })
+      setAnalysis(res.data.analysis)
+    } else {
+      console.error('Please select a text!')
+    }
+
+    setLoading(false)
+  }
+
   return (
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
-        {messages.length ? (
-          <>
-            <ChatList messages={messages} />
-            <ChatScrollAnchor trackVisibility={isLoading} />
-          </>
-        ) : (
-          <>
-            <div className="mb-4">
-              <TextSelector {...{ text, setText }} />
-            </div>
+        <div className="mb-4">
+          <TextSelector {...{ text, setText }} />
+        </div>
 
-            {text && <UnderlinedTextArea />}
-          </>
+        {text && (
+          <UnderlinedTextArea handleSubmit={handleSubmit} loading={loading} />
+        )}
+
+        {analysis && (
+          <div className="mx-auto mb-4 flex max-w-2xl flex-col gap-4 px-4">
+            <div className="flex flex-col gap-4 rounded-lg border bg-background p-8">
+              <h4 className="text-xl font-semibold">Analysis 💫</h4>
+              <div>
+                <p className="text-lg font-semibold">
+                  Consistency: {analysis.consistencyScore}/5
+                </p>
+                {analysis.consistency}
+              </div>
+              <div>
+                <p className="text-lg font-semibold">
+                  Grammer: {analysis.grammerScore}/5
+                </p>
+                {analysis.grammer}
+              </div>
+              <div>
+                <p className="text-lg font-semibold">
+                  Style: {analysis.styleScore}/5
+                </p>
+                {analysis.style}
+              </div>
+            </div>
+          </div>
         )}
       </div>
-      <ChatPanel
+
+      {/* <ChatPanel
         id={id}
         isLoading={isLoading}
         stop={stop}
@@ -78,7 +102,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         messages={messages}
         input={input}
         setInput={setInput}
-      />
+      /> */}
 
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>

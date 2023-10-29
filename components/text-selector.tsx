@@ -60,7 +60,7 @@ export function TextSelector({
                 {text?.author}
               </h4>
             </div>
-            <p className="my-2 leading-normal ">{text?.text}</p>
+            <p className="my-2 text-justify leading-normal">{text?.text}</p>
           </div>
         )}
       </div>
