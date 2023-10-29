@@ -23,6 +23,7 @@ import { Text } from '@/lib/consts'
 import UnderlinedTextArea from './underlined-textarea'
 import { analyseText } from '@/lib/api'
 import { Analysis } from '@/lib/ai'
+import toast from 'react-hot-toast'
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
@@ -45,8 +46,18 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLoading(true)
 
     if (text) {
-      const res = await analyseText({ part1: text?.text, part2: providedText })
-      setAnalysis(res.data.analysis)
+      try {
+        const res = await analyseText({
+          part1: text?.text,
+          part2: providedText
+        })
+        setAnalysis(res.data.analysis)
+      } catch (e) {
+        toast.error(
+          'Unable to evaluate your writing. Can you please try again?'
+        )
+        setLoading(false)
+      }
     } else {
       console.error('Please select a text!')
     }
