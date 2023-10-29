@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { type Chat } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { IconMessage, IconUsers } from '@/components/ui/icons'
@@ -12,9 +11,10 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import { Analysis } from '@/lib/ai'
 
 interface SidebarItemProps {
-  chat: Chat
+  chat: Analysis
   children: React.ReactNode
 }
 

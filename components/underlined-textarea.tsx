@@ -8,6 +8,7 @@ import z from 'zod'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
   secondPart: z
@@ -23,15 +24,19 @@ const FormSchema = z.object({
 const UnderlinedTextArea = ({
   handleSubmit,
   loading,
-  firstTry
+  firstTry,
+  resetAnalysis
 }: {
   handleSubmit: (text: string) => void
   loading: boolean
   firstTry: boolean
+  resetAnalysis: () => void
 }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   })
+
+  const router = useRouter()
 
   return (
     <>
@@ -72,16 +77,31 @@ const UnderlinedTextArea = ({
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                disabled={loading}
-                className="shrink bg-green-600 hover:bg-green-700 active:bg-green-800"
-              >
-                {loading && (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                )}
-                {firstTry ? 'Evaluate' : 'Try Again'}
-              </Button>
+              {firstTry ? (
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="shrink bg-green-600 hover:bg-green-700 active:bg-green-800"
+                >
+                  {loading && (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  Evaluate
+                </Button>
+              ) : (
+                <Button
+                  onClick={e => {
+                    e.preventDefault()
+                    form.reset({ secondPart: '' })
+                    resetAnalysis()
+                    router.refresh()
+                    router.push('/')
+                  }}
+                  className="shrink bg-green-600 hover:bg-green-700 active:bg-green-800"
+                >
+                  Try Again
+                </Button>
+              )}
             </form>
           </Form>
         </div>

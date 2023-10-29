@@ -38,11 +38,12 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import { Analysis } from '@/lib/ai'
 
 interface SidebarActionsProps {
-  chat: Chat
+  chat: Analysis
   removeChat: (args: { id: string; path: string }) => ServerActionResult<void>
-  shareChat: (chat: Chat) => ServerActionResult<Chat>
+  shareChat: (chat: Analysis) => ServerActionResult<Analysis>
 }
 
 export function SidebarActions({
@@ -56,7 +57,7 @@ export function SidebarActions({
   const [isSharePending, startShareTransition] = React.useTransition()
   const router = useRouter()
 
-  const copyShareLink = React.useCallback(async (chat: Chat) => {
+  const copyShareLink = React.useCallback(async (chat: Analysis) => {
     if (!chat.sharePath) {
       return toast.error('Could not copy share link to clipboard')
     }

@@ -3,7 +3,8 @@ import { StructuredOutputParser } from 'langchain/output_parsers'
 import z from 'zod'
 import { PromptTemplate } from 'langchain/prompts'
 
-export interface Analysis {
+export interface Analysis extends Record<string, any> {
+  id: string
   grammerScore: number
   grammer: string
   consistencyScore: number

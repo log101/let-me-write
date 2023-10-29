@@ -49,7 +49,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       try {
         const res = await analyseText({
           part1: text?.text,
-          part2: providedText
+          part2: providedText,
+          title: text.title
         })
         setAnalysis(res.data.analysis)
       } catch (e) {
@@ -81,6 +82,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             handleSubmit={handleSubmit}
             loading={loading}
             firstTry={!analysis}
+            resetAnalysis={resetAnalysis}
           />
         )}
 
