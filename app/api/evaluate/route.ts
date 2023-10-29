@@ -1,5 +1,5 @@
 import { kv } from '@vercel/kv'
-import { auth } from '@/auth'
+import { auth } from '@clerk/nextjs'
 import { analyze } from '@/lib/ai'
 import { NextResponse } from 'next/server'
 import { nanoid } from '@/lib/utils'
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const json = await req.json()
 
   const { part1, part2, title } = json
-  const userId = (await auth())?.user.id
+  const userId = auth()?.userId
   const createdAt = Date.now()
 
   if (!userId) {
