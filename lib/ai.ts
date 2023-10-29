@@ -17,24 +17,38 @@ const analysisSchema = z.object({
     .number()
     .positive()
     .lte(5)
-    .describe('Score of the grammatical analysis of the second part'),
-  grammer: z.string().describe('Grammatical analysis of the second part'),
+    .describe(
+      'Grammatical feedback as a score from 1 to 5 for the student who wrote the second part'
+    ),
+  grammer: z
+    .string()
+    .describe(
+      'Grammatical feedback for the student who wrote the second part, must be at least 4-5 sentences'
+    ),
   consistencyScore: z
     .number()
     .positive()
     .lte(5)
     .describe(
-      'Score of the analysis of whether the part 1 and part 2 are consistent'
+      'Feedback score from 1 to 5 for the consistency between part 1 and 2 for the student who wrote the second paragraph'
     ),
   consistency: z
     .string()
-    .describe('Analysis of whether the part 1 and part 2 are consistent'),
+    .describe(
+      'Feedback on the consistency between part 1 and 2 for the student who wrote the second paragraph, must be at least 4-5 sentences'
+    ),
   styleScore: z
     .number()
     .positive()
     .lte(5)
-    .describe('Score of the literary analysis of part 2'),
-  style: z.string().describe('Literary analysis of part 2')
+    .describe(
+      'Feedback score from 1 to 5 on the style for the student who wrote the second part'
+    ),
+  style: z
+    .string()
+    .describe(
+      'Style feedback for the student who wrote the second part, must be at least 4-5 sentences'
+    )
 })
 
 const parser = StructuredOutputParser.fromZodSchema(analysisSchema)
@@ -50,7 +64,7 @@ const getPrompt = async ({
 
   const prompt = new PromptTemplate({
     template:
-      "Analyse the part 1 and part 2, the first part are taken from an authentic author while the second is written by a high school student. You're going to give a feedback to the student so respond accordingly... Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{part1}\n{part2}",
+      "Analyse the part 1 and part 2, the first part are taken from an authentic author while the second is written by a high school student. You're going to give a feedback to the student so respond accordingly... Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\nPart 1: {part1}\nPart 2: {part2}",
     inputVariables: ['part1', 'part2'],
     partialVariables: { format_instructions }
   })

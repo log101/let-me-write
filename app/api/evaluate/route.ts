@@ -6,6 +6,8 @@ export const runtime = 'edge'
 
 export async function POST(req: Request) {
   const json = await req.json()
+  console.log('🚀 ~ file: route.ts:9 ~ POST ~ json:', json)
+
   const { part1, part2 } = json
   const userId = (await auth())?.user.id
 
@@ -16,6 +18,5 @@ export async function POST(req: Request) {
   }
 
   const res = await analyze({ part1, part2 })
-
   return NextResponse.json({ data: { analysis: res } })
 }

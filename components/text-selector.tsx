@@ -14,10 +14,12 @@ import { TEXTS, Text } from '@/lib/consts'
 
 export function TextSelector({
   text,
-  setText
+  setText,
+  resetAnalysis
 }: {
   text: Text | undefined
   setText: Dispatch<SetStateAction<Text | undefined>>
+  resetAnalysis: () => void
 }) {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-4 px-4">
@@ -32,7 +34,10 @@ export function TextSelector({
 
       <div className="rounded-lg border bg-background p-8">
         <Select
-          onValueChange={id => setText(TEXTS.find(text => text.id === id))}
+          onValueChange={id => {
+            setText(TEXTS.find(text => text.id === id))
+            resetAnalysis()
+          }}
         >
           <SelectTrigger>
             <SelectValue placeholder="Select a text" />

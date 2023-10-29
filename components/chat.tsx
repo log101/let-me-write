@@ -16,10 +16,9 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { FormEvent, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { toast } from 'react-hot-toast'
 import { Text } from '@/lib/consts'
 import UnderlinedTextArea from './underlined-textarea'
 import { analyseText } from '@/lib/api'
@@ -55,15 +54,23 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLoading(false)
   }
 
+  const resetAnalysis = () => {
+    setAnalysis(undefined)
+  }
+
   return (
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
         <div className="mb-4">
-          <TextSelector {...{ text, setText }} />
+          <TextSelector {...{ text, setText, resetAnalysis }} />
         </div>
 
         {text && (
-          <UnderlinedTextArea handleSubmit={handleSubmit} loading={loading} />
+          <UnderlinedTextArea
+            handleSubmit={handleSubmit}
+            loading={loading}
+            firstTry={!analysis}
+          />
         )}
 
         {analysis && (
