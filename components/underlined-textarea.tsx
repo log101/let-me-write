@@ -33,6 +33,7 @@ const UnderlinedTextArea = ({
   resetAnalysis: () => void
 }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
+    // @ts-ignore
     resolver: zodResolver(FormSchema)
   })
 
