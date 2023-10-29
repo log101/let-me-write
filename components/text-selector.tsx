@@ -48,17 +48,21 @@ export function TextSelector({
             </SelectGroup>
           </SelectContent>
         </Select>
-        <div className="mt-2 flex flex-col p-1">
-          <div>
-            <h3 className="my-2 text-center leading-normal text-slate-900">
-              {text?.title}
-            </h3>
-            <h4 className="my-2 text-center leading-normal text-slate-500">
-              {text?.author}
-            </h4>
+        {!text ? (
+          <p className="mt-3 p-1 font-semibold">Please select a text.</p>
+        ) : (
+          <div className="mt-2 flex flex-col p-1">
+            <div>
+              <h3 className="my-2 text-center leading-normal text-slate-900">
+                {text?.title}
+              </h3>
+              <h4 className="my-2 text-center leading-normal text-slate-500">
+                {text?.author}
+              </h4>
+            </div>
+            <p className="my-2 leading-normal ">{text?.text}</p>
           </div>
-          <p className="my-2 leading-normal ">{text?.text}</p>
-        </div>
+        )}
       </div>
     </div>
   )
