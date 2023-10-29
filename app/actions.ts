@@ -6,6 +6,7 @@ import { kv } from '@vercel/kv'
 
 import { auth } from '@/auth'
 import { type Analysis } from '@/lib/ai'
+import { AnalysisPayload } from '@/lib/types'
 
 export async function getChats(userId?: string | null) {
   if (!userId) {
@@ -31,7 +32,7 @@ export async function getChats(userId?: string | null) {
 }
 
 export async function getChat(id: string, userId: string) {
-  const chat = await kv.hgetall<Analysis>(`chat:${id}`)
+  const chat = await kv.hgetall<AnalysisPayload>(`chat:${id}`)
 
   if (!chat || (userId && chat.userId !== userId)) {
     return null

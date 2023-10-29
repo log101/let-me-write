@@ -111,8 +111,8 @@ dependencies:
     specifier: ^5.1.1
     version: 5.1.1
   zod:
-    specifier: ^3.21.4
-    version: 3.21.4
+    specifier: ^3.22.3
+    version: 3.22.4
 
 devDependencies:
   '@tailwindcss/typography':

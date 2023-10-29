@@ -3,7 +3,6 @@ import { auth } from '@/auth'
 import { analyze } from '@/lib/ai'
 import { NextResponse } from 'next/server'
 import { nanoid } from '@/lib/utils'
-import { revalidatePath } from 'next/cache'
 
 export const runtime = 'edge'
 

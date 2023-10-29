@@ -2,8 +2,9 @@ import { type Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
 import { auth } from '@/auth'
-import { getChat } from '@/app/actions'
+import { getChat } from '@/app/getChat'
 import { Chat } from '@/components/chat'
+import { ArchivedChat } from '@/components/chat-archived'
 
 export const runtime = 'edge'
 export const preferredRegion = 'home'
@@ -36,15 +37,15 @@ export default async function ChatPage({ params }: ChatPageProps) {
     redirect(`/sign-in?next=/chat/${params.id}`)
   }
 
-  const chat = await getChat(params.id, session.user.id)
+  const analysis = await getChat(params.id, session.user.id)
 
-  if (!chat) {
+  if (!analysis) {
     notFound()
   }
 
-  if (chat?.userId !== session?.user?.id) {
+  if (analysis?.userId !== session?.user?.id) {
     notFound()
   }
 
-  return <Chat id={chat.id} initialMessages={chat.messages} />
+  return <ArchivedChat analysis={analysis.analysis} />
 }

@@ -1,4 +1,5 @@
 import { type Message } from 'ai'
+import { Analysis } from './ai'
 
 export interface Chat extends Record<string, any> {
   id: string
@@ -16,3 +17,12 @@ export type ServerActionResult<Result> = Promise<
       error: string
     }
 >
+
+export interface AnalysisPayload extends Record<string, any> {
+  id: string
+  title: string
+  userId: string
+  createdAt: number
+  path: string
+  analysis: Analysis
+}

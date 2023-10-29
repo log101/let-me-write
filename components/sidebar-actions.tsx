@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 
-import { type Chat, ServerActionResult } from '@/lib/types'
+import { ServerActionResult } from '@/lib/types'
 import { cn, formatDate } from '@/lib/utils'
 import {
   AlertDialog,
@@ -122,7 +122,7 @@ export function SidebarActions({
           <div className="space-y-1 rounded-md border p-4 text-sm">
             <div className="font-medium">{chat.title}</div>
             <div className="text-muted-foreground">
-              {formatDate(chat.createdAt)} · {chat.messages.length} messages
+              {/* formatDate(chat.createdAt)} · {chat.messages.length} messages */}
             </div>
           </div>
           <DialogFooter className="items-center">

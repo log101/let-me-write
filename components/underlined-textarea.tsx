@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React from 'react'
 import { Textarea } from './ui/textarea'
 import { Button } from './ui/button'
 import { ReloadIcon } from '@radix-ui/react-icons'
@@ -95,7 +95,6 @@ const UnderlinedTextArea = ({
                     form.reset({ secondPart: '' })
                     resetAnalysis()
                     router.refresh()
-                    router.push('/')
                   }}
                   className="shrink bg-green-600 hover:bg-green-700 active:bg-green-800"
                 >
