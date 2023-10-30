@@ -19,8 +19,7 @@ export const TEXTS: Text[] = [
     wedding-day, and on Wednesday Miss Lucas paid her farewell visit; and
     when she rose to take leave, Elizabeth, ashamed of her mother’s
     ungracious and reluctant good wishes, and sincerely affected herself,
-    accompanied her out of the room. As they went down stairs together,
-    Charlotte said`
+    accompanied her out of the room.`
   },
   {
     id: '2',
