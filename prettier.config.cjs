@@ -7,6 +7,8 @@ module.exports = {
   arrowParens: 'avoid',
   tabWidth: 2,
   trailingComma: 'none',
+  printWidth: 80,
+  proseWrap: "preserve",
   importOrder: [
     '^(react/(.*)$)|^(react$)',
     '^(next/(.*)$)|^(next$)',

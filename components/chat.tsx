@@ -28,10 +28,10 @@ import toast from 'react-hot-toast'
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
-  id?: string
+  id: string
 }
 
-export function Chat({ id, initialMessages, className }: ChatProps) {
+export function Chat({ id, className }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -48,6 +48,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     if (text) {
       try {
         const res = await analyseText({
+          id,
           part1: text?.text,
           part2: providedText,
           title: text.title
@@ -112,17 +113,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
         )}
       </div>
-
-      {/* <ChatPanel
-        id={id}
-        isLoading={isLoading}
-        stop={stop}
-        append={append}
-        reload={reload}
-        messages={messages}
-        input={input}
-        setInput={setInput}
-      /> */}
 
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>

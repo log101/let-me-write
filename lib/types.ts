@@ -24,5 +24,7 @@ export interface AnalysisPayload extends Record<string, any> {
   userId: string
   createdAt: number
   path: string
+  textOriginal: string
+  textSupplied: string
   analysis: Analysis
 }

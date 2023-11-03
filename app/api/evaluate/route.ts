@@ -2,14 +2,14 @@ import { kv } from '@vercel/kv'
 import { auth } from '@clerk/nextjs'
 import { analyze } from '@/lib/ai'
 import { NextResponse } from 'next/server'
-import { nanoid } from '@/lib/utils'
+import { AnalysisPayload } from '@/lib/types'
 
 export const runtime = 'edge'
 
 export async function POST(req: Request) {
   const json = await req.json()
 
-  const { part1, part2, title } = json
+  const { id, part1, part2, title } = json
   const userId = auth()?.userId
   const createdAt = Date.now()
 
@@ -21,23 +21,31 @@ export async function POST(req: Request) {
 
   const res = await analyze({ part1, part2 })
 
-  const id = json.id ?? nanoid()
   const path = `/chat/${id}`
 
-  const payload = {
-    id,
-    title,
-    userId,
-    createdAt,
-    path,
-    analysis: res
+  if (!res) {
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  } else {
+    const payload: AnalysisPayload = {
+      id,
+      title,
+      userId,
+      createdAt,
+      textOriginal: part1,
+      textSupplied: part2,
+      path,
+      analysis: res
+    }
+
+    await kv.hmset(`chat:${id}`, payload)
+    await kv.zadd(`user:chat:${userId}`, {
+      score: createdAt,
+      member: `chat:${id}`
+    })
+
+    return NextResponse.json({ data: { analysis: res } })
   }
-
-  await kv.hmset(`chat:${id}`, payload)
-  await kv.zadd(`user:chat:${userId}`, {
-    score: createdAt,
-    member: `chat:${id}`
-  })
-
-  return NextResponse.json({ data: { analysis: res } })
 }

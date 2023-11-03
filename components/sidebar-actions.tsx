@@ -191,7 +191,7 @@ export function SidebarActions({
                 event.preventDefault()
                 startRemoveTransition(async () => {
                   const result = await removeChat({
-                    id: chat.id,
+                    id: chat.id!,
                     path: chat.path
                   })
 
