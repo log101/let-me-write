@@ -6,6 +6,19 @@
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"eamodio.gitlens",
+				"dbaeumer.vscode-eslint",
+				"ms-vscode.vscode-typescript-next",
+				"esbenp.prettier-vscode",
+				"bradlc.vscode-tailwindcss",
+				"ChakrounAnas.turbo-console-log",
+				"Dabolus.uncanny-cognitive-complexity"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
