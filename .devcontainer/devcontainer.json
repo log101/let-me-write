@@ -16,7 +16,8 @@
 				"esbenp.prettier-vscode",
 				"bradlc.vscode-tailwindcss",
 				"ChakrounAnas.turbo-console-log",
-				"Dabolus.uncanny-cognitive-complexity"
+				"Dabolus.uncanny-cognitive-complexity",
+				"GitHub.vscode-pull-request-github"
 			]
 		}
 	}
