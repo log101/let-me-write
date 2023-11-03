@@ -3,10 +3,12 @@ import { Analysis } from './ai'
 const createURL = (path: string) => window.location.origin + path
 
 export const analyseText = async ({
+  id,
   part1,
   part2,
   title
 }: {
+  id: string
   part1: string
   part2: string
   title: string
@@ -14,7 +16,7 @@ export const analyseText = async ({
   const res = await fetch(
     new Request(createURL('/api/evaluate'), {
       method: 'POST',
-      body: JSON.stringify({ part1, part2, title })
+      body: JSON.stringify({ id, part1, part2, title })
     })
   )
 

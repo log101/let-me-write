@@ -4,7 +4,7 @@ import z from 'zod'
 import { PromptTemplate } from 'langchain/prompts'
 
 export interface Analysis extends Record<string, any> {
-  id: string
+  id?: string
   grammerScore: number
   grammer: string
   consistencyScore: number
@@ -65,7 +65,16 @@ const getPrompt = async ({
 
   const prompt = new PromptTemplate({
     template:
-      "Analyse the part 1 and part 2, the first part are taken from an authentic author while the second is written by a high school student. You're going to give a feedback to the student so respond accordingly... Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\nPart 1: {part1}\nPart 2: {part2}",
+      "Analyse the part 1 and part 2, the first part are taken from an authentic author while the second is written by a high school student.  \
+      You're going to give a feedback to the student so respond accordingly... \
+      Follow the instructions and format your response to match the format instructions, no matter what! \
+      \n{format_instructions} \
+      \n========= Part 1 START ========= \
+      \n{part1} \
+      \n========= Part 1 END   ========= \
+      \n========= Part 2 START ========= \
+      \n{part2} \
+      \n========= Part 2 END   =========",
     inputVariables: ['part1', 'part2'],
     partialVariables: { format_instructions }
   })

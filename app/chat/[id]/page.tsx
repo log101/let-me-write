@@ -2,7 +2,7 @@ import { type Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
 import { auth } from '@clerk/nextjs'
-import { getChat } from '@/app/getChat'
+import { getChat } from '@/app/actions'
 import { ArchivedChat } from '@/components/chat-archived'
 
 export const runtime = 'edge'
@@ -46,5 +46,5 @@ export default async function ChatPage({ params }: ChatPageProps) {
     notFound()
   }
 
-  return <ArchivedChat analysis={analysis.analysis} />
+  return <ArchivedChat analysisPayload={analysis} />
 }
