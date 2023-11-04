@@ -11,6 +11,7 @@ import { Header } from '@/components/header'
 import { ClerkProvider } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.BASE_URL ?? 'http://localhost:3000'),
   title: {
     default: 'Let Me Write',
     template: `%s - Let Me Write`
@@ -24,6 +25,9 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png'
+  },
+  openGraph: {
+    images: '/cover.webp'
   }
 }
 
