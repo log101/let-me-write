@@ -1,8 +1,10 @@
+<a href="https://letmewrite.vercel.app/">
   <img alt="Project cover photo" src="assets/images/let-me-write-cover.webp">
   <h1 align="center">Let Me Write</h1>
+</a>
 
 <p align="center">
-  Let Me Write, leveraging LLM models, let's you write along famous authors as if you are the author!
+  Let Me Write, leveraging LLM models, let's you write along best writers as if you are the author!
 </p>
 
 <p align="center">
