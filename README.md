@@ -4,7 +4,7 @@
 </a>
 
 <p align="center">
-  Let Me Write, leveraging LLM models, let's you write along best writers as if you are the author!
+  Let Me Write, leveraging LLM models, let's you write along best writers as if you are the author! Check out the <a href="https://letmewrite.vercel.app/">demo!</a>
 </p>
 
 <p align="center">
