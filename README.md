@@ -1,4 +1,4 @@
-  <img alt="Next.js 13 and app template Router-ready AI chatbot." src="assets/images/let-me-write-cover.png">
+  <img alt="Project cover photo" src="assets/images/let-me-write-cover.webp">
   <h1 align="center">Let Me Write</h1>
 
 <p align="center">
