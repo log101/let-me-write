@@ -3,7 +3,6 @@ import Link from 'next/link'
 
 import { SignInButton, SignedIn, SignedOut, auth } from '@clerk/nextjs'
 import { clearChats } from '@/app/actions'
-import { Button, buttonVariants } from '@/components/ui/button'
 import { Sidebar } from '@/components/sidebar'
 import { SidebarList } from '@/components/sidebar-list'
 import { IconNextChat, IconSeparator } from '@/components/ui/icons'
