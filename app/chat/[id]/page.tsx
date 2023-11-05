@@ -14,21 +14,6 @@ export interface ChatPageProps {
   }
 }
 
-export async function generateMetadata({
-  params
-}: ChatPageProps): Promise<Metadata> {
-  const session = auth()
-
-  if (!session?.userId) {
-    return {}
-  }
-
-  const chat = await getChat(params.id, session.userId)
-  return {
-    title: chat?.title.toString().slice(0, 50) ?? 'Chat'
-  }
-}
-
 export default async function ChatPage({ params }: ChatPageProps) {
   const session = auth()
 
