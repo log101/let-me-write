@@ -2,13 +2,15 @@ import { Metadata } from 'next'
 
 import { Toaster } from 'react-hot-toast'
 
-import '@/app/globals.css'
+import '@/app/[locale]/globals.css'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { ClerkProvider } from '@clerk/nextjs'
+
+import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL ?? 'http://localhost:3000'),
@@ -28,14 +30,24 @@ export const metadata: Metadata = {
   }
 }
 
+const locales = ['en', 'tr']
+
 interface RootLayoutProps {
   children: React.ReactNode
+  params: {
+    locale: string
+  }
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+  params: { locale }
+}: RootLayoutProps) {
+  if (!locales.includes(locale as any)) notFound()
+
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang={locale} suppressHydrationWarning>
         <head />
         <body
           className={cn(

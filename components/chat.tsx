@@ -1,12 +1,9 @@
 'use client'
 
-import { useChat, type Message } from 'ai/react'
+import { type Message } from 'ai/react'
 
 import { cn } from '@/lib/utils'
-import { ChatList } from '@/components/chat-list'
-import { ChatPanel } from '@/components/chat-panel'
 import { TextSelector } from './text-selector'
-import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import {
   Dialog,
@@ -16,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Text } from '@/lib/consts'
@@ -29,9 +26,10 @@ const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
   id: string
+  title: string
 }
 
-export function Chat({ id, className }: ChatProps) {
+export function Chat({ id, className, title }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -75,7 +73,7 @@ export function Chat({ id, className }: ChatProps) {
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
         <div className="mb-4">
-          <TextSelector {...{ text, setText, resetAnalysis }} />
+          <TextSelector {...{ text, setText, resetAnalysis }} title={title} />
         </div>
 
         {text && (

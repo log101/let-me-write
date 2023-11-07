@@ -15,16 +15,18 @@ import { TEXTS, Text } from '@/lib/consts'
 export function TextSelector({
   text,
   setText,
-  resetAnalysis
+  resetAnalysis,
+  title
 }: {
   text: Text | undefined
   setText: Dispatch<SetStateAction<Text | undefined>>
   resetAnalysis: () => void
+  title: string
 }) {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-4 px-4">
       <div className="rounded-lg border bg-background p-8">
-        <h1 className="mb-2 text-lg font-semibold">Let Me Write ✍️</h1>
+        <h1 className="mb-2 text-lg font-semibold">{title}</h1>
         <p className="mb-2 leading-normal text-muted-foreground">
           Now it&apos;s your turn to write! Choose a piece from below and
           complete the missing texts by writing them yourself. After completing

@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import { SignInButton, SignedIn, SignedOut, auth } from '@clerk/nextjs'
-import { clearChats } from '@/app/actions'
+import { clearChats } from '@/app/[locale]/actions'
 import { Sidebar } from '@/components/sidebar'
 import { SidebarList } from '@/components/sidebar-list'
 import { IconNextChat, IconSeparator } from '@/components/ui/icons'

@@ -2,7 +2,7 @@ import { type Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
 import { auth } from '@clerk/nextjs'
-import { getChat } from '@/app/actions'
+import { getChat } from '@/app/[locale]/actions'
 import { ArchivedChat } from '@/components/chat-archived'
 
 export const runtime = 'edge'
