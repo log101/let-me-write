@@ -54,8 +54,8 @@ pnpm dev
 - [ ] Add a skill tree ***
 - [ ] Add write along mode, where you write in turns with AI taking a text as a reference ***
 
-* Hard
-+ Easy
+\* Hard
+\+ Easy
 
 ## Authors
 
