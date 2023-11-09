@@ -35,7 +35,27 @@ pnpm install
 pnpm dev
 ```
 
-The app should now be running on [localhost:3000](http://localhost:3000/).
+## To Do
+
+- [x] i18n support
+- [ ] Add Turkish translations +
+- [ ] Add a more descriptive introductory welcoming text +
+- [ ] Fix sharing feature *
+- [ ] Add ability to create classrooms **
+- [ ] Add tts *
+- [ ] Show the character count +
+- [ ] Add confirmation dialog for try again button +
+- [ ] Make sidebar always open as in ChatGPT *
+- [ ] Show grammatical errors with highlighting **
+- [ ] Give better feedback *
+- [ ] Let use continue writing after the submission +
+- [ ] Ask for users' education on onboarding +
+- [ ] Create custom opengraphs +
+- [ ] Add a skill tree ***
+- [ ] Add write along mode, where you write in turns with AI taking a text as a reference ***
+
+* Hard
++ Easy
 
 ## Authors
 
