@@ -41,6 +41,8 @@ pnpm dev
 - [ ] Add Turkish translations +
 - [ ] Add a more descriptive introductory welcoming text +
 - [ ] Fix sharing feature *
+- [ ] Make reviews more qualitative, don't give x out of 5 feedbacks, that's disheartening for users *
+- [ ] Ask guiding questions to the review *
 - [ ] Add ability to create classrooms **
 - [ ] Add tts *
 - [ ] Show the character count +
