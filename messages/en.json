@@ -1,6 +1,14 @@
 {
   "Home": {
     "title": "Let Me Write ✍️",
-    "language": "English (US)"
+    "language": "English (US)",
+    "appDescription": "Now it's your turn to write! Choose a piece from below and complete the missing texts by writing them yourself. After completing the text, press the evaluation button to see your shortcomings.",
+    "selectText": "Please select a text.",
+    "selectTextPlaceholder": "Select a text",
+    "selectTextHeading": "Texts",
+    "yourTurn": "Now it's your turn to write! How would continue this paragraph if you were the writer? Type it below.",
+    "textInputPlaceholder": "Complete the text above.",
+    "evaluateButton": "Evaluate",
+    "tryAgainButton": "Evaluate"
   }
 }

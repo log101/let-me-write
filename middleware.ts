@@ -12,7 +12,7 @@ const intlMiddleware = createMiddleware({
 
 export default authMiddleware({
   beforeAuth: req => {
-    return intlMiddleware(req)
+    if (!req.nextUrl.pathname.startsWith('/api')) return intlMiddleware(req)
   },
   publicRoutes: ['/(share)/(.*)', '/:locale/sign-in']
 })
