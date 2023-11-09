@@ -9,6 +9,7 @@
     "yourTurn": "Now it's your turn to write! How would continue this paragraph if you were the writer? Type it below.",
     "textInputPlaceholder": "Complete the text above.",
     "evaluateButton": "Evaluate",
-    "tryAgainButton": "Evaluate"
+    "tryAgainButton": "Try Again",
+    "evaluateError": "Unable to evaluate your writing. Can you please try again?"
   }
 }

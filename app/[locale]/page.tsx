@@ -1,13 +1,17 @@
 import { nanoid } from '@/lib/utils'
 import { Chat } from '@/components/chat'
-import { useTranslations } from 'next-intl'
+import { NextIntlClientProvider, useLocale, useMessages } from 'next-intl'
 
 export const runtime = 'edge'
 
 export default function IndexPage() {
   const id = nanoid()
+  const locale = useLocale()
+  const messages = useMessages()
 
-  const t = useTranslations('Home')
-
-  return <Chat id={id} title={t('title')} />
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Chat id={id} />
+    </NextIntlClientProvider>
+  )
 }

@@ -2,13 +2,14 @@
   "Home": {
     "title": "Yazarım Bak ✍️",
     "language": "Türkçe",
-    "appDescription": "Yazma sırası sende! Aşağıdan bir metin seç ve bir paragraf ile kendin yazarak tamamla. Tamamladıktan sonra değerlendir butonuna basarak eksiklerini görebilirsin.",
+    "appDescription": "Yazma sırası sende! Aşağıdan bir metin seç ve seçtiğin metni bir paragraf ile tamamla. Tamamladıktan sonra değerlendir butonuna basarak eksiklerini görebilirsin.",
     "selectText": "Lütfen bir metin seçin.",
     "selectTextPlaceholder": "Bir metin seçin",
     "selectTextHeading": "Metinler",
     "yourTurn": "Şimdi senin sıran! Metnin yazarı sen olsaydın nasıl devam ederdin?",
     "textInputPlaceholder": "Yukarıdaki metni tamamlayın.",
     "evaluateButton": "Değerlendir",
-    "tryAgainButton": "Yeniden Dene"
+    "tryAgainButton": "Yeniden Dene",
+    "evaluateError": "Yazını değerlendiremedik, yeniden dener misin?"
   }
 }

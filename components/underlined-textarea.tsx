@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Textarea } from './ui/textarea'
 import { Button } from './ui/button'
 import { ReloadIcon } from '@radix-ui/react-icons'
@@ -9,6 +9,8 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import TextInputDescription from './text-input-description'
+import { useTranslations } from 'next-intl'
 
 const FormSchema = z.object({
   secondPart: z
@@ -21,7 +23,7 @@ const FormSchema = z.object({
     })
 })
 
-const UnderlinedTextArea = ({
+const UserTextInputArea = ({
   handleSubmit,
   loading,
   firstTry,
@@ -38,18 +40,11 @@ const UnderlinedTextArea = ({
   })
 
   const router = useRouter()
+  const t = useTranslations('Home')
 
   return (
     <>
-      <div className="mx-auto mb-4 flex max-w-2xl flex-col gap-4 px-4">
-        <div className="rounded-lg border bg-background p-8">
-          <p className="font-semibold">
-            Now it&apos;s your turn to write! How would continue this paragraph
-            if you were the writer? Type it below.
-          </p>
-        </div>
-      </div>
-
+      <TextInputDescription />
       <div className="mx-auto mb-4 flex max-w-2xl flex-col gap-4 px-4">
         <div className="justify-end rounded-lg border bg-background p-8">
           <Form {...form}>
@@ -68,7 +63,7 @@ const UnderlinedTextArea = ({
                       <Textarea
                         disabled={loading}
                         rows={6}
-                        placeholder="Complete the text above."
+                        placeholder={t('textInputPlaceholder')}
                         className="resize-none"
                         spellCheck={false}
                         {...field}
@@ -87,7 +82,7 @@ const UnderlinedTextArea = ({
                   {loading && (
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Evaluate
+                  {t('evaluateButton')}
                 </Button>
               ) : (
                 <Button
@@ -99,7 +94,7 @@ const UnderlinedTextArea = ({
                   }}
                   className="shrink bg-green-600 hover:bg-green-700 active:bg-green-800"
                 >
-                  Try Again
+                  {t('tryAgainButton')}
                 </Button>
               )}
             </form>
@@ -110,4 +105,4 @@ const UnderlinedTextArea = ({
   )
 }
 
-export default UnderlinedTextArea
+export default UserTextInputArea

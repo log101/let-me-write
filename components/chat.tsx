@@ -4,41 +4,26 @@ import { type Message } from 'ai/react'
 
 import { cn } from '@/lib/utils'
 import { TextSelector } from './text-selector'
-import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog'
 import { useState } from 'react'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
 import { Text } from '@/lib/consts'
-import UnderlinedTextArea from './underlined-textarea'
+import UserTextInputArea from './underlined-textarea'
 import { analyseText } from '@/lib/api'
 import { Analysis } from '@/lib/ai'
 import toast from 'react-hot-toast'
+import HeroDescription from './hero-description'
+import TextInputDescription from './text-input-description'
+import { useTranslations } from 'next-intl'
 
-const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
   id: string
-  title: string
 }
 
-export function Chat({ id, className, title }: ChatProps) {
-  const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
-    'ai-token',
-    null
-  )
-  const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
-  const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
+export function Chat({ id, className }: ChatProps) {
   const [text, setText] = useState<Text>()
   const [analysis, setAnalysis] = useState<Analysis>()
   const [loading, setLoading] = useState(false)
+  const t = useTranslations()
 
   const handleSubmit = async (providedText: string) => {
     setLoading(true)
@@ -53,9 +38,7 @@ export function Chat({ id, className, title }: ChatProps) {
         })
         setAnalysis(res.data.analysis)
       } catch (e) {
-        toast.error(
-          'Unable to evaluate your writing. Can you please try again?'
-        )
+        toast.error(t('evaluateError'))
         setLoading(false)
       }
     } else {
@@ -73,11 +56,14 @@ export function Chat({ id, className, title }: ChatProps) {
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
         <div className="mb-4">
-          <TextSelector {...{ text, setText, resetAnalysis }} title={title} />
+          <div className="mx-auto flex max-w-2xl flex-col gap-4 px-4">
+            <HeroDescription />
+            <TextSelector {...{ text, setText, resetAnalysis }} />
+          </div>
         </div>
 
         {text && (
-          <UnderlinedTextArea
+          <UserTextInputArea
             handleSubmit={handleSubmit}
             loading={loading}
             firstTry={!analysis}
@@ -111,42 +97,6 @@ export function Chat({ id, className, title }: ChatProps) {
           </div>
         )}
       </div>
-
-      <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Enter your OpenAI Key</DialogTitle>
-            <DialogDescription>
-              If you have not obtained your OpenAI API key, you can do so by{' '}
-              <a
-                href="https://platform.openai.com/signup/"
-                className="underline"
-              >
-                signing up
-              </a>{' '}
-              on the OpenAI website. This is only necessary for preview
-              environments so that the open source community can test the app.
-              The token will be saved to your browser&apos;s local storage under
-              the name <code className="font-mono">ai-token</code>.
-            </DialogDescription>
-          </DialogHeader>
-          <Input
-            value={previewTokenInput}
-            placeholder="OpenAI API key"
-            onChange={e => setPreviewTokenInput(e.target.value)}
-          />
-          <DialogFooter className="items-center">
-            <Button
-              onClick={() => {
-                setPreviewToken(previewTokenInput)
-                setPreviewTokenDialog(false)
-              }}
-            >
-              Save Token
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </>
   )
 }
