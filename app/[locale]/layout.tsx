@@ -9,6 +9,7 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { ClerkProvider } from '@clerk/nextjs'
+import { trTR } from '@clerk/localizations'
 
 import { notFound } from 'next/navigation'
 
@@ -39,14 +40,30 @@ interface RootLayoutProps {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params: { locale }
 }: RootLayoutProps) {
   if (!locales.includes(locale as any)) notFound()
 
+  let clerkLocal
+  switch (locale) {
+    case 'tr':
+      clerkLocal = trTR
+      break
+    default:
+      break
+  }
+
+  let messages
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default
+  } catch (error) {
+    notFound()
+  }
+
   return (
-    <ClerkProvider>
+    <ClerkProvider localization={clerkLocal}>
       <html lang={locale} suppressHydrationWarning>
         <head />
         <body
@@ -57,7 +74,13 @@ export default function RootLayout({
           )}
         >
           <Toaster />
-          <Providers attribute="class" defaultTheme="system" enableSystem>
+          <Providers
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            locale={locale}
+            messages={messages}
+          >
             <div className="flex min-h-screen flex-col">
               {/* @ts-ignore */}
               <Header />

@@ -14,7 +14,7 @@ export default authMiddleware({
   beforeAuth: req => {
     if (!req.nextUrl.pathname.startsWith('/api')) return intlMiddleware(req)
   },
-  publicRoutes: ['/(share)/(.*)', '/:locale/sign-in']
+  publicRoutes: ['/(share)/(.*)']
 })
 
 export const config = {

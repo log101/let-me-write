@@ -50,9 +50,11 @@ export async function Header() {
           </SignedOut>
         </div>
       </div>
-      <div className="flex items-center space-x-2">
-        <SelectLanguage locale={locale} />
-      </div>
+      {session?.userId && (
+        <div className="flex items-center space-x-2">
+          <SelectLanguage locale={locale} />
+        </div>
+      )}
     </header>
   )
 }

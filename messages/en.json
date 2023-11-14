@@ -10,6 +10,16 @@
     "textInputPlaceholder": "Complete the text above.",
     "evaluateButton": "Evaluate",
     "tryAgainButton": "Try Again",
-    "evaluateError": "Unable to evaluate your writing. Can you please try again?"
+    "evaluateError": "Unable to evaluate your writing. Can you please try again?",
+    "sidebarTitle": "Archive",
+    "clearSidebar": "Clear Archive",
+    "reviewTitle": "Review 💫",
+    "consistency": "Consistency",
+    "grammer": "Grammer",
+    "style": "Style",
+    "sidebarAlertTitle": "Are you absolutely sure?",
+    "sidebarAlertext": "This will permanently delete your chat history and remove your data from our servers.",
+    "delete": "Delete",
+    "cancel": "Cancel"
   }
 }

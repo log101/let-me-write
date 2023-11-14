@@ -10,6 +10,16 @@
     "textInputPlaceholder": "Yukarıdaki metni tamamlayın.",
     "evaluateButton": "Değerlendir",
     "tryAgainButton": "Yeniden Dene",
-    "evaluateError": "Yazını değerlendiremedik, yeniden dener misin?"
+    "evaluateError": "Yazını değerlendiremedik, yeniden dener misin?",
+    "sidebarTitle": "Arşiv",
+    "clearSidebar": "Arşivi Sıfırla",
+    "reviewTitle": "Değerlendirme 💫",
+    "consistency": "Tutarlılık",
+    "grammer": "Dil Bilgisi",
+    "style": "Üslup",
+    "sidebarAlertTitle": "Emin misiniz?",
+    "sidebarAlertText": "Arşiv bir daha geri getiremeyeceğinz bir şekilde silinecek.",
+    "delete": "Sil",
+    "cancel": "Vazgeç"
   }
 }
